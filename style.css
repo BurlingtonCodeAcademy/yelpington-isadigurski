@@ -37,29 +37,48 @@ body {
 }
 
 .sidebar-container {
-    display: grid;
-    grid-area: sidebar-container;
+    flex: 1;
+    padding: 0 10px 0 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-image: linear-gradient(rgb(236, 116, 116), rgb(136, 29, 29));
+    color: red;
+}
+
+#restaurant-title {
+    text-align: center;
+    color: white;
+}
+
+.restaurants {
+    font-size: 17px;
+    list-style-type: none;
 }
 
 #restaurant-list {
-    background-color: red;
-    color: white;
-    border: solid black;
+    background-color: (rgb(236, 116, 116), rgb(136, 29, 29));;
+    line-height: 140%;
 }
 
 .sidebar-post-container {
     background-color: red;
     color: white;
-    border: solid black;
+    border: solid white;
 }
 
 .map-container {
-    display: grid;
+    display: flex;
     grid-area: map-container;
+    padding: 0 0px 0 0px;
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 #map {
-    width: 1300px;
+    display: flex;
+    grid-area: map-container;
+    border-radius: 10px;
+    width: 1270px;
 }
 
 

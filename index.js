@@ -1,10 +1,5 @@
-//Centers Right On Burlington
+//Centers Right On Burlington - City Hall Park
 let myMap = L.map('map').setView([44.4773, -73.212], 16);
-
-//Places A Messag On A Single Pin
-//let marker = [L.marker([44.4761289, -73.211555]).addTo(myMap)]
-//let myMarker = L.marker([44.4761289, -73.211555]).addTo(myMap)
-//myMarker.bindPopup(`Ahli Baba's Kabob Shop`)
 
 //Leaflet Map
 L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {

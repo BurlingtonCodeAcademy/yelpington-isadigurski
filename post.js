@@ -29,19 +29,22 @@ async function getRestaurantData(id) {
     hours.textContent = data.hours
     notes.textContent = data.notes
 
-    let retaurantName = await fetch(`https://json-server.burlingtoncodeacademy.now.sh/restaurants/${data.name}`)
+    let restaurantInfo = await fetch(`https://json-server.burlingtoncodeacademy.now.sh/restaurants/${data.id}`)
         .then((response) => {
             return response.json()
         })
         .then((userJson) => {
-            return userJson.name
+            return userJson
         })
 
-    getRestaurants.textContent = retaurantName
+    console.log(restaurantInfo)
+
+    let myInfo = `${name.textContent}` + '<br><br>' + `${notes.textContent}`//Places Information in Marker
+    placeMarker(restaurantInfo.address, myInfo)//Calls Marker Function
+    //getRestaurants.textContent = retaurantName
 }
 
 getRestaurantData(id)
-
 
 
 let myMap = L.map('map').setView([44.475, -73.2121], 20);
@@ -51,10 +54,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 }).addTo(myMap);
 
+//Gets Address & Adds Pin To Post Page
 function getLatLon(address) {
 
     fetch(
-       `https://nominatim.openstreetmap.org/search/?q=${address}&format=json`
+        `https://nominatim.openstreetmap.org/search/?q=${address}&format=json`
     ).then((data) => {
         return data.json()
     })
@@ -62,7 +66,6 @@ function getLatLon(address) {
             let info = locInfo[0]
             let lat = info.lat
             let lon = info.lon
-            L.marker([lat, lon]).addTo(myMap)
             myMap.panTo([lat, lon])
         })
 }
@@ -76,31 +79,35 @@ async function getRestaurant(name) {
             return jsonObj
         })
 
-let address = restaurant.address
+    let address = restaurant.address
 
-getLatLon(address)
+    getLatLon(address)
 }
 
 getRestaurant(id)
+
 //This will add a message to the pin when you click on pin
-//////////////////////////////////////////////////////////
 function placeMarker(address, myInfo) {
 
-	fetch(
+    fetch(
         `https://nominatim.openstreetmap.org/search/?q=${address}&format=json`
-        )
-		.then((data) => {
-			return data.json()
-		})
-		.then((locInfo) => {
-			let info = locInfo[0]
-			let lat = info.lat
-			let lon = info.lon
-			let thisMarker = L.marker([lat, lon]).addTo(myMap).bindPopup(myInfo)
-			thisMarker.on('mouseover', () => {
-				thisMarker.openPopup()
-			})
-		})
-}
+    )
+        .then((data) => {
+            return data.json()
+        })
+        .then((locInfo) => {
+            let info = locInfo[0]
+            let lat = info.lat
+            let lon = info.lon
+            let thisMarker = L.marker([lat, lon]).addTo(myMap).bindPopup(myInfo)
 
-placeMarker(id, notes)
+            console.log(thisMarker)
+
+            thisMarker.on('mouseover', () => {
+                thisMarker.openPopup()
+            })
+            thisMarker.on('mouseout', () => {
+                thisMarker.closePopup()
+            })
+        })
+}

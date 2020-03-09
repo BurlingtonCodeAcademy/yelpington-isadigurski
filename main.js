@@ -21,6 +21,8 @@ async function getRestaurants() {
 
         listContainer.innerHTML += `<li><a href='/post/${id}'>${name}</a></li>`
     })
+//This is for the future to add additional restaurants
+//
 //    restaurantList = await fetch('restaurants.json')
 //        .then((response) => {
 //            return response.json()
