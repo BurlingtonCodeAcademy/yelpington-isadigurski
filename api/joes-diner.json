@@ -1,0 +1,11 @@
+{
+    "id": "joes-diner",
+    "name": "Joe's Diner",
+    "address": "123 King St.",
+    "phone number": "555-1221",
+    "hours": "7:00 am - 3:00 pm",
+    "notes": [
+      "Their sriracha breakfast sandwich is quite good.",
+      "Every Thursday is meatloaf day."
+    ]
+  }
